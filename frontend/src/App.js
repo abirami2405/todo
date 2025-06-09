@@ -48,14 +48,19 @@ const Login = ({ onLogin }) => {
   // Keep only Google login button
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-500 via-purple-600 to-pink-500 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-gradient-to-br from-[#3e2723] via-[#5d4037] to-[#795548] flex items-center justify-center p-4">
       <div className="bg-white/10 backdrop-blur-lg rounded-3xl p-8 w-full max-w-md shadow-2xl border border-white/20">
         <div className="text-center mb-8">
-          <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4">
-            <CheckCircle className="w-8 h-8 text-white" />
+          <div className="w-24 h-24 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4">
+            {/* <CheckCircle className="w-8 h-8 text-white" /> */}
+            <img
+        src="/logo.png"
+        alt="Tickify Logo"
+        className="w-24 h-24 mx-auto mb-4 object-contain"
+      />
           </div>
-          <h1 className="text-3xl font-bold text-white mb-2">TodoMaster</h1>
-          <p className="text-white/80">Organize your life, one task at a time</p>
+          <h1 className="text-4xl font-bold text-[#ffccbc] drop-shadow-sm mb-2">Tickify</h1>
+          <p className="text-[#d7ccc8] text-lg">Tick it off, stress off</p>
         </div>
         
         {isLoading ? (
@@ -118,42 +123,40 @@ const TaskForm = ({ task, onSubmit, onCancel }) => {
   };
 
   return (
-    <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4 z-50">
-      <div className="bg-white rounded-2xl p-6 w-full max-w-md shadow-2xl max-h-[90vh] overflow-y-auto">
-        <h2 className="text-2xl font-bold text-gray-800 mb-6">
+    <div className="fixed inset-0 bg-[#3e2723]/70 backdrop-blur-sm flex items-center justify-center p-4 z-50">
+      <div className="bg-gradient-to-br from-[#ffccbc] to-[#d7ccc8] rounded-2xl p-6 w-full max-w-md shadow-2xl max-h-[90vh] overflow-y-auto border border-[#795548]/20">
+        <h2 className="text-2xl font-bold text-[#3e2723] mb-6">
           {task ? 'Edit Task' : 'Create New Task'}
         </h2>
         
         <div className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">Title *</label>
+            <label className="block text-sm font-medium text-[#5d4037] mb-2">Title *</label>
             <input
               type="text"
               value={formData.title}
               onChange={(e) => setFormData({...formData, title: e.target.value})}
-              className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+              className="w-full px-4 py-3 border border-[#795548]/30 rounded-xl focus:ring-2 focus:ring-[#795548] focus:border-[#795548] transition-all bg-white/80 text-[#3e2723]"
               placeholder="Enter task title"
               required
             />
           </div>
           
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">Description</label>
+            <label className="block text-sm font-medium text-[#5d4037] mb-2">Description</label>
             <textarea
               value={formData.description}
               onChange={(e) => setFormData({...formData, description: e.target.value})}
-              className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all h-24 resize-none"
-              placeholder="Enter task description (optional)"
+              className="w-full px-4 py-3 border border-[#795548]/30 rounded-xl focus:ring-2 focus:ring-[#795548] focus:border-[#795548] transition-all h-24 resize-none bg-white/80 text-[#3e2723]"
             />
           </div>
           
           <div className="flex space-x-4">
             <div className="flex-1">
-              <label className="block text-sm font-medium text-gray-700 mb-2">Priority</label>
-              <select
+              <label className="block text-sm font-medium text-[#5d4037] mb-2">Priority</label>              <select
                 value={formData.priority}
                 onChange={(e) => setFormData({...formData, priority: e.target.value})}
-                className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                className="w-full px-4 py-3 border border-[#795548]/30 rounded-xl focus:ring-2 focus:ring-[#795548] focus:border-[#795548] transition-all bg-white/80 text-[#3e2723]"
               >
                 <option value="low">Low</option>
                 <option value="medium">Medium</option>
@@ -162,12 +165,12 @@ const TaskForm = ({ task, onSubmit, onCancel }) => {
             </div>
             
             <div className="flex-1">
-              <label className="block text-sm font-medium text-gray-700 mb-2">Due Date</label>
+              <label className="block text-sm font-medium text-[#5d4037] mb-2">Due Date</label>
               <input
                 type="date"
                 value={formData.dueDate}
                 onChange={(e) => setFormData({...formData, dueDate: e.target.value})}
-                className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                className="w-full px-4 py-3 border border-[#795548]/30 rounded-xl focus:ring-2 focus:ring-[#795548] focus:border-[#795548] transition-all bg-white/80 text-[#3e2723]"
                 min={new Date().toISOString().split('T')[0]}
               />
             </div>
@@ -177,14 +180,14 @@ const TaskForm = ({ task, onSubmit, onCancel }) => {
             <button
               onClick={handleSubmit}
               disabled={isSubmitting || !formData.title.trim()}
-              className="flex-1 bg-blue-600 hover:bg-blue-700 disabled:bg-gray-400 text-white font-semibold py-3 px-6 rounded-xl transition-all duration-300 transform hover:-translate-y-1 shadow-lg hover:shadow-xl disabled:transform-none"
+              className="flex-1 bg-[#795548] hover:bg-[#5d4037] disabled:bg-gray-400 text-white font-semibold py-3 px-6 rounded-xl transition-all duration-300 transform hover:-translate-y-1 shadow-lg hover:shadow-xl disabled:transform-none"
             >
               {isSubmitting ? 'Saving...' : (task ? 'Update Task' : 'Create Task')}
             </button>
             <button
               onClick={onCancel}
               disabled={isSubmitting}
-              className="flex-1 bg-gray-500 hover:bg-gray-600 disabled:bg-gray-400 text-white font-semibold py-3 px-6 rounded-xl transition-all duration-300"
+              className="flex-1 bg-[#8d6e63] hover:bg-[#6d4c41] disabled:bg-gray-400 text-white font-semibold py-3 px-6 rounded-xl transition-all duration-300"
             >
               Cancel
             </button>
@@ -200,8 +203,8 @@ const TaskCard = ({ task, onEdit, onDelete, onToggle }) => {
   const [isUpdating, setIsUpdating] = useState(false);
 
   const priorityColors = {
-    low: 'bg-green-100 text-green-800 border-green-200',
-    medium: 'bg-yellow-100 text-yellow-800 border-yellow-200',
+      low: 'bg-green-100 text-green-800 border-green-200',
+    medium: 'bg-amber-100 text-amber-800 border-amber-200',
     high: 'bg-red-100 text-red-800 border-red-200'
   };
 
@@ -233,13 +236,13 @@ const TaskCard = ({ task, onEdit, onDelete, onToggle }) => {
   };
 
   return (
-    <div className={`bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border ${task.completed ? 'opacity-75' : ''} ${isOverdue ? 'border-red-200' : 'border-gray-200'}`}>
+     <div className={`bg-gradient-to-br from-[#ffccbc]/90 to-[#d7ccc8]/90 backdrop-blur-sm rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border ${task.completed ? 'opacity-75' : ''} ${isOverdue ? 'border-red-300' : 'border-[#795548]/20'}`}>
       <div className="flex items-start justify-between mb-4">
         <div className="flex items-center space-x-3 flex-1">
           <button
             onClick={handleToggle}
             disabled={isUpdating}
-            className="text-blue-600 hover:text-blue-700 transition-colors disabled:opacity-50"
+           className="text-[#795548] hover:text-[#5d4037] transition-colors disabled:opacity-50"
           >
             {task.completed ? (
               <CheckCircle className="w-6 h-6" />
@@ -248,7 +251,7 @@ const TaskCard = ({ task, onEdit, onDelete, onToggle }) => {
             )}
           </button>
           <div className="flex-1">
-            <h3 className={`font-semibold text-lg ${task.completed ? 'line-through text-gray-500' : 'text-gray-800'}`}>
+           <h3 className={`font-semibold text-lg ${task.completed ? 'line-through text-[#8d6e63]' : 'text-[#3e2723]'}`}>
               {task.title}
             </h3>
             <div className="flex items-center space-x-2 mt-1">
@@ -267,14 +270,14 @@ const TaskCard = ({ task, onEdit, onDelete, onToggle }) => {
         <div className="flex space-x-2">
           <button
             onClick={() => onEdit(task)}
-            className="p-2 text-gray-600 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all"
+             className="p-2 text-[#8d6e63] hover:text-[#795548] hover:bg-white/50 rounded-lg transition-all"
             title="Edit task"
           >
             <Edit3 className="w-4 h-4" />
           </button>
           <button
             onClick={() => onDelete(task._id)}
-            className="p-2 text-gray-600 hover:text-red-600 hover:bg-red-50 rounded-lg transition-all"
+            className="p-2 text-[#8d6e63] hover:text-red-600 hover:bg-red-50 rounded-lg transition-all"
             title="Delete task"
           >
             <Trash2 className="w-4 h-4" />
@@ -283,13 +286,13 @@ const TaskCard = ({ task, onEdit, onDelete, onToggle }) => {
       </div>
       
       {task.description && (
-        <p className={`text-gray-600 mb-4 ${task.completed ? 'line-through' : ''}`}>
+       <p className={`text-[#5d4037] mb-4 ${task.completed ? 'line-through' : ''}`}>
           {task.description}
         </p>
       )}
       
       {task.dueDate && (
-        <p className={`text-sm ${isOverdue ? 'text-red-600 font-medium' : 'text-gray-500'}`}>
+        <p className={`text-sm ${isOverdue ? 'text-red-600 font-medium' : 'text-[#8d6e63]'}`}>
           Due: {formatDate(task.dueDate)}
         </p>
       )}
@@ -403,10 +406,10 @@ const Dashboard = ({ user, onLogout }) => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+      <div className="min-h-screen bg-gradient-to-br from-[#3e2723] via-[#5d4037] to-[#795548] flex items-center justify-center">
         <div className="text-center">
-          <div className="w-12 h-12 border-4 border-blue-600 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
-          <p className="text-gray-600">Loading your tasks...</p>
+          <div className="w-12 h-12 border-4 border-[#ffccbc]/30 border-t-[#ffccbc] rounded-full animate-spin mx-auto mb-4"></div>
+          <p className="text-[#ffccbc] text-lg">Loading your tasks...</p>
         </div>
       </div>
     );
@@ -415,27 +418,30 @@ const Dashboard = ({ user, onLogout }) => {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
-      <header className="bg-white shadow-sm border-b">
+      <header className="bg-gradient-to-r from-[#ffccbc]/20 to-[#d7ccc8]/20 backdrop-blur-lg shadow-lg border-b border-white/10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center space-x-3">
-              <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
-                <CheckCircle className="w-5 h-5 text-white" />
+              <div className="w-8 h-8 bg-[#ffccbc] rounded-lg flex items-center justify-center">
+                <img
+                    src="/logo.png"
+                    alt="Tickify Logo"
+                    className="w-24 h-24 mx-auto mb-4 object-contain"
+                  />
               </div>
-              <h1 className="text-xl font-bold text-gray-800">TodoMaster</h1>
+              <h1 className="text-xl font-bold text-[#ffccbc]">Tickify</h1>
             </div>
             
             <div className="flex items-center space-x-4">
               <div className="flex items-center space-x-2">
-                <div className="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center">
-                  <User className="w-4 h-4 text-white" />
+                <div className="w-8 h-8 bg-[#795548] rounded-full flex items-center justify-center">
+                  <User className="w-4 h-4 text-[#ffccbc]" />
                 </div>
-                <span className="text-gray-700 font-medium hidden sm:inline">{user?.name || 'User'}</span>
+                  <span className="text-[#d7ccc8] font-medium hidden sm:inline">{user?.name || 'User'}</span>
               </div>
               <button
-                onClick={onLogout}
-                className="flex items-center space-x-2 px-4 py-2 text-gray-600 hover:text-red-600 hover:bg-red-50 rounded-lg transition-all"
-              >
+                onClick={handleLogout}
+                className="flex items-center space-x-2 px-4 py-2 text-gray-600 hover:text-red-600 hover:bg-red-50 rounded-lg transition-all">
                 <LogOut className="w-4 h-4" />
                 <span className="hidden sm:inline">Logout</span>
               </button>
@@ -447,23 +453,23 @@ const Dashboard = ({ user, onLogout }) => {
       {/* Main Content */}
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Stats Cards */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-          <div className="bg-white rounded-2xl p-4 shadow-lg">
+         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+          <div className="bg-gradient-to-br from-[#ffccbc]/90 to-[#d7ccc8]/90 backdrop-blur-sm rounded-2xl p-4 shadow-lg border border-white/10">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-gray-600 text-sm">Total</p>
-                <p className="text-2xl font-bold text-gray-800">{stats.total}</p>
+                <p className="text-[#5d4037] text-sm">Total</p>
+                <p className="text-2xl font-bold text-[#3e2723]">{stats.total}</p>
               </div>
-              <div className="w-10 h-10 bg-blue-100 rounded-xl flex items-center justify-center">
-                <CheckCircle className="w-5 h-5 text-blue-600" />
+             <div className="w-10 h-10 bg-[#795548]/20 rounded-xl flex items-center justify-center">
+                <CheckCircle className="w-5 h-5 text-[#795548]" />
               </div>
             </div>
           </div>
           
-          <div className="bg-white rounded-2xl p-4 shadow-lg">
+          <div className="bg-gradient-to-br from-[#ffccbc]/90 to-[#d7ccc8]/90 backdrop-blur-sm rounded-2xl p-4 shadow-lg border border-white/10">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-gray-600 text-sm">Completed</p>
+                <p className="text-[#5d4037] text-sm">Completed</p>
                 <p className="text-2xl font-bold text-green-600">{stats.completed}</p>
               </div>
               <div className="w-10 h-10 bg-green-100 rounded-xl flex items-center justify-center">
@@ -472,23 +478,23 @@ const Dashboard = ({ user, onLogout }) => {
             </div>
           </div>
           
-          <div className="bg-white rounded-2xl p-4 shadow-lg">
+          <div className="bg-gradient-to-br from-[#ffccbc]/90 to-[#d7ccc8]/90 backdrop-blur-sm rounded-2xl p-4 shadow-lg border border-white/10">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-gray-600 text-sm">Pending</p>
+                <p className="text-[#5d4037] text-sm">Pending</p>
                 <p className="text-2xl font-bold text-orange-600">{stats.pending}</p>
               </div>
-              <div className="w-10 h-10 bg-orange-100 rounded-xl flex items-center justify-center">
-                <Circle className="w-5 h-5 text-orange-600" />
+              <div className="w-10 h-10 bg-amber-100 rounded-xl flex items-center justify-center">
+                <Circle className="w-5 h-5 text-amber-600" />
               </div>
             </div>
           </div>
 
-          <div className="bg-white rounded-2xl p-4 shadow-lg">
+          <div className="bg-gradient-to-br from-[#ffccbc]/90 to-[#d7ccc8]/90 backdrop-blur-sm rounded-2xl p-4 shadow-lg border border-white/10">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-gray-600 text-sm">Overdue</p>
-                <p className="text-2xl font-bold text-red-600">{stats.overdue}</p>
+                <p className="text-[#5d4037] text-sm">Overdue</p>
+                <p className="text-2xl font-bold text-red-700">{stats.overdue}</p>
               </div>
               <div className="w-10 h-10 bg-red-100 rounded-xl flex items-center justify-center">
                 <Circle className="w-5 h-5 text-red-600" />
@@ -506,8 +512,8 @@ const Dashboard = ({ user, onLogout }) => {
                 onClick={() => setFilter(filterType)}
                 className={`px-4 py-2 rounded-xl font-medium transition-all capitalize ${
                   filter === filterType
-                    ? 'bg-blue-600 text-white shadow-lg'
-                    : 'bg-white text-gray-600 hover:bg-gray-50'
+                    ? 'bg-[#795548] text-[#ffccbc] shadow-lg'
+                    : 'bg-[#ffccbc]/80 text-[#5d4037] hover:bg-[#ffccbc]'
                 }`}
               >
                 {filterType} {filterType === 'all' ? `(${stats.total})` : filterType === 'pending' ? `(${stats.pending})` : `(${stats.completed})`}
@@ -517,7 +523,7 @@ const Dashboard = ({ user, onLogout }) => {
           
           <button
             onClick={() => setShowForm(true)}
-            className="flex items-center space-x-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-3 rounded-xl transition-all duration-300 transform hover:-translate-y-1 shadow-lg hover:shadow-xl"
+            className="flex items-center space-x-2 bg-[#795548] hover:bg-[#5d4037] text-[#ffccbc] font-semibold px-6 py-3 rounded-xl transition-all duration-300 transform hover:-translate-y-1 shadow-lg hover:shadow-xl"
           >
             <Plus className="w-5 h-5" />
             <span>Add Task</span>
@@ -527,19 +533,19 @@ const Dashboard = ({ user, onLogout }) => {
         {/* Tasks Grid */}
         {filteredTasks.length === 0 ? (
           <div className="text-center py-16">
-            <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <div className="w-16 h-16 bg-[#ffccbc]/20 rounded-full flex items-center justify-center mx-auto mb-4">
               <CheckCircle className="w-8 h-8 text-gray-400" />
             </div>
-            <h3 className="text-xl font-semibold text-gray-600 mb-2">
+            <h3 className="text-xl font-semibold text-[#ffccbc] mb-2">
               {filter === 'all' ? 'No tasks yet' : `No ${filter} tasks`}
             </h3>
-            <p className="text-gray-500 mb-6">
+            <p className="text-[#d7ccc8] mb-6">
               {filter === 'all' ? 'Create your first task to get started!' : `You have no ${filter} tasks.`}
             </p>
             {filter === 'all' && (
               <button
                 onClick={() => setShowForm(true)}
-                className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-3 rounded-xl transition-all duration-300 transform hover:-translate-y-1 shadow-lg hover:shadow-xl"
+                className="bg-[#795548] hover:bg-[#5d4037] text-[#ffccbc] font-semibold px-6 py-3 rounded-xl transition-all duration-300 transform hover:-translate-y-1 shadow-lg hover:shadow-xl"
               >
                 Create Your First Task
               </button>
@@ -614,10 +620,11 @@ const App = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-500 via-purple-600 to-pink-500 flex items-center justify-center">
+      <div className="min-h-screen bg-gradient-to-br from-amber-900 via-amber-800 to-amber-700 flex items-center justify-center">
         <div className="text-center">
-          <div className="w-12 h-12 border-4 border-white/30 border-t-white rounded-full animate-spin mx-auto mb-4"></div>
-          <p className="text-white text-lg">Loading TodoMaster...</p>
+          <div className="w-12 h-12 border-4 border-amber-200/30 border-t-amber-200 rounded-full animate-spin mx-auto mb-4"></div>
+          
+          <p className="text-[#ffccbc] text-lg">Loading TodoMaster...</p>
         </div>
       </div>
     );
