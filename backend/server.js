@@ -24,10 +24,11 @@ app.use(session({
   resave: false,
   saveUninitialized: false,
   cookie: {
-    secure: false, // Set to true in production with HTTPS
+    secure: true, // Set to true in production with HTTPS
     maxAge: 24 * 60 * 60 * 1000 // 24 hours
   }
 }));
+app.set('trust proxy', 1);
 
 // Initialize Passport
 app.use(passport.initialize());
