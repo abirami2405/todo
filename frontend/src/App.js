@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { User, Plus, Edit3, Trash2, CheckCircle, Circle, LogOut, Mail ,Facebook, Github} from 'lucide-react';
 import { authAPI, tasksAPI } from './services/api';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 
 const Login = ({ onLogin }) => {
   const [isLoading, setIsLoading] = useState(false);
@@ -62,7 +63,8 @@ const Login = ({ onLogin }) => {
           <h1 className="text-4xl font-bold text-[#ffccbc] drop-shadow-sm mb-2">Tickify</h1>
           <p className="text-[#d7ccc8] text-lg">Tick it off, stress off</p>
         </div>
-        
+      
+ 
         {isLoading ? (
   <div className="text-center">
     <div className="w-8 h-8 border-3 border-white/30 border-t-white rounded-full animate-spin mx-auto mb-4"></div>
@@ -103,7 +105,32 @@ const Login = ({ onLogin }) => {
     </div>
   );
 };
+// AuthSuccess Component - Place this right after the Login component
+const AuthSuccess = ({ onLogin }) => {
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const token = params.get('token');
+    if (token) {
+      localStorage.setItem('token', token);
+      authAPI.getCurrentUser()
+        .then(user => {
+          onLogin(user);
+        })
+        .catch(() => {
+          localStorage.removeItem('token');
+        });
+    }
+  }, [onLogin]);
 
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-[#3e2723] via-[#5d4037] to-[#795548] flex items-center justify-center">
+      <div className="text-center">
+        <div className="w-12 h-12 border-4 border-[#ffccbc]/30 border-t-[#ffccbc] rounded-full animate-spin mx-auto mb-4"></div>
+        <p className="text-[#ffccbc] text-lg">Signing you in...</p>
+      </div>
+    </div>
+  );
+};
 // Task Form Component
 const TaskForm = ({ task, onSubmit, onCancel }) => {
   const [formData, setFormData] = useState({
@@ -623,17 +650,39 @@ const App = () => {
       <div className="min-h-screen bg-gradient-to-br from-amber-900 via-amber-800 to-amber-700 flex items-center justify-center">
         <div className="text-center">
           <div className="w-12 h-12 border-4 border-amber-200/30 border-t-amber-200 rounded-full animate-spin mx-auto mb-4"></div>
-          
           <p className="text-[#ffccbc] text-lg">Loading TodoMaster...</p>
         </div>
       </div>
     );
   }
 
-  return user ? (
-    <Dashboard user={user} onLogout={handleLogout} />
-  ) : (
-    <Login onLogin={handleLogin} />
+  return (
+    <Router>
+      <Routes>
+        <Route
+          path="/"
+          element={
+            user ? (
+              <Dashboard user={user} onLogout={handleLogout} />
+            ) : (
+              <Login onLogin={handleLogin} />
+            )
+          }
+        />
+        <Route
+          path="/auth/success"
+          element={<AuthSuccess onLogin={handleLogin} />}
+        />
+        <Route
+          path="*"
+          element={
+            <div className="min-h-screen flex items-center justify-center text-[#ffccbc]">
+              <h1 className="text-4xl font-bold">404 - Page Not Found</h1>
+            </div>
+          }
+        />
+      </Routes>
+    </Router>
   );
 };
 
