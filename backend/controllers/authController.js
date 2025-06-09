@@ -36,7 +36,12 @@ const register = async (req, res) => {
     }
 
     // Create new user
-    const user = new User({ name, email, password });
+    const user = new User({ 
+  name, 
+  email, 
+  password,
+  provider: 'local' 
+});
     await user.save();
 
     // Generate token
