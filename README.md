@@ -26,7 +26,7 @@
 
 ## 📺 Loom Video
 
-🎥 [Watch the demo video on Loom](https://www.loom.com/share/your-demo-video-link)
+🎥 [Watch the demo video on Loom][https://drive.google.com/file/d/1jMIX8O6wxjQWKx1uwvYVXkWR1o-sbFWd/view?usp=sharing]
 
 ---
 
